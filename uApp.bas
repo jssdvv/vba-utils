@@ -7,8 +7,8 @@ Private originalCalculation As XlCalculation
 'events, and automatic calculation.
 '*/
 Public Sub EnableOptimization()
-    originalCalculation = Application.Calculation
     On Error Resume Next
+    originalCalculation = Application.Calculation
     Application.Calculation = xlCalculationManual
     Application.DisplayStatusBar = False
     Application.ScreenUpdating = False
