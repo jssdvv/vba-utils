@@ -9,7 +9,7 @@ Option Explicit
 '*/
 Public Function clamp(ByVal value As Long, ByVal min As Long, ByVal max As Long) As Long
     If min > max Then
-        Err.Raise _
+        VBA.Err.Raise _
             Number:=5, _
             Source:="uLong.clamp", _
             Description:="Invalid boundaries: 'min' cannot be greater than 'max'."
@@ -86,10 +86,10 @@ End Function
 '*/
 Public Function minIn(ByRef nums() As Long) As Long
     If uArray.count(nums) = 0 Then Exit Function
-    Dim lower As Long: lower = LBound(nums)
+    Dim lower As Long: lower = VBA.LBound(nums)
     Dim i As Long
     minIn = nums(lower)
-    For i = lower + 1 To UBound(nums)
+    For i = lower + 1 To VBA.UBound(nums)
         If nums(i) < minIn Then minIn = nums(i)
     Next i
 End Function
@@ -102,10 +102,10 @@ End Function
 '*/
 Public Function maxIn(ByRef nums() As Long) As Long
     If uArray.count(nums) = 0 Then Exit Function
-    Dim lower As Long: lower = LBound(nums)
+    Dim lower As Long: lower = VBA.LBound(nums)
     Dim i As Long
     maxIn = nums(lower)
-    For i = lower + 1 To UBound(nums)
+    For i = lower + 1 To VBA.UBound(nums)
         If nums(i) > maxIn Then maxIn = nums(i)
     Next i
 End Function
