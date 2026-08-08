@@ -67,3 +67,28 @@ Public Function splitNoBlank(ByVal text As String, ByVal delimiter As String) As
         splitNoBlank = result
     End If
 End Function
+
+'/*
+'Counts how many times a specific substring or character
+'occurs inside a string
+'
+'return: Number of chars occurrences
+'        Zero if text or chars is empty
+'        Zero if chars is longer than text
+'*/
+Public Function countChars(ByVal text As String, ByVal chars As String) As Long
+    Dim lenBText As Long: lenBText = VBA.LenB(text)
+    Dim lenBChars As Long: lenBChars = VBA.LenB(chars)
+
+    If lenBText = 0 Or lenBChars = 0 Or lenBChars > lenBText Then Exit Function
+
+    Dim lenChars As Long: lenChars = lenBChars \ 2
+    Dim pos As Long: pos = 1
+
+    Do
+        pos = VBA.InStr(pos, text, chars, vbBinaryCompare)
+        If pos = 0 Then Exit Do
+        countChars = countChars + 1
+        pos = pos + lenChars
+    Loop
+End Function
