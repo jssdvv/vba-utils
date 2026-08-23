@@ -1,10 +1,10 @@
 Option Explicit
 
 '/*
-'Splits a string by delimiter and removes empty elements
-'and preserves whitespace in non-empty elements
+' Splits a [text] by [delimiter], preserves whitespaces in non-empty
+' elements and removes empty elements.
 '
-'return: Allocated String array
+' @return Allocated String array.
 '*/
 Public Function splitNoEmpty(ByVal text As String, ByVal delimiter As String) As String()
     If VBA.LenB(text) = 0 Then
@@ -13,12 +13,12 @@ Public Function splitNoEmpty(ByVal text As String, ByVal delimiter As String) As
     End If
 
     Dim parts() As String: parts = VBA.Split(text, delimiter)
-    Dim result() As String: ReDim result(0 To VBA.UBound(parts))
+    Dim result() As String: ReDim result(0 To UBound(parts))
     
     Dim i As Long
     Dim j As Long: j = -1
     
-    For i = 0 To VBA.UBound(parts)
+    For i = 0 To UBound(parts)
         If VBA.LenB(parts(i)) > 0 Then
             result(j) = parts(i)
             j = j + 1
@@ -34,10 +34,10 @@ Public Function splitNoEmpty(ByVal text As String, ByVal delimiter As String) As
 End Function
 
 '/*
-'Splits a string by delimiter, trims whitespace from each
-'element, and removes blank elements
+' Splits a [text] by [delimiter], trims whitespaces from each element
+' and removes empty elements.
 '
-'return: Allocated String array
+' @return Allocated String array.
 '*/
 Public Function splitNoBlank(ByVal text As String, ByVal delimiter As String) As String()
     If VBA.LenB(text) = 0 Then
@@ -46,13 +46,13 @@ Public Function splitNoBlank(ByVal text As String, ByVal delimiter As String) As
     End If
 
     Dim parts() As String: parts = VBA.Split(text, delimiter)
-    Dim result() As String: ReDim result(0 To VBA.UBound(parts))
+    Dim result() As String: ReDim result(0 To UBound(parts))
     
     Dim item As String
     Dim i As Long
     Dim j As Long: j = -1
     
-    For i = 0 To VBA.UBound(parts)
+    For i = 0 To UBound(parts)
         item = VBA.Trim$(parts(i))
         If VBA.LenB(item) > 0 Then
             result(j) = item
@@ -69,12 +69,10 @@ Public Function splitNoBlank(ByVal text As String, ByVal delimiter As String) As
 End Function
 
 '/*
-'Counts how many times a specific substring or character
-'occurs inside a string
+' Counts the occurrences of specific [chars] inside a [text].
 '
-'return: Number of chars occurrences
-'        Zero if text or chars is empty
-'        Zero if chars is longer than text
+' @return Number of chars occurrences, or zero if [text] or [chars] is
+'         empty or if [chars] is longer than [text].
 '*/
 Public Function countChars(ByVal text As String, ByVal chars As String) As Long
     Dim lenBText As Long: lenBText = VBA.LenB(text)
@@ -82,13 +80,12 @@ Public Function countChars(ByVal text As String, ByVal chars As String) As Long
 
     If lenBText = 0 Or lenBChars = 0 Or lenBChars > lenBText Then Exit Function
 
-    Dim lenChars As Long: lenChars = lenBChars \ 2
-    Dim pos As Long: pos = 1
+    Dim posB As Long: posB = 1
 
     Do
-        pos = VBA.InStr(pos, text, chars, vbBinaryCompare)
-        If pos = 0 Then Exit Do
+        posB = VBA.InStrB(posB, text, chars, vbBinaryCompare)
+        If posB = 0 Then Exit Do
         countChars = countChars + 1
-        pos = pos + lenChars
+        posB = posB + lenBChars
     Loop
 End Function
