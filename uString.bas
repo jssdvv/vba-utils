@@ -89,3 +89,29 @@ Public Function countChars(ByVal text As String, ByVal chars As String) As Long
         posB = posB + lenBChars
     Loop
 End Function
+
+'/*
+' Gets the digits inside a [text].
+'
+' @return The numeric digits of a [text] as a String.
+'*/
+Public Function digits(ByVal text As String) As String
+    If VBA.LenB(text) = 0 Then Exit Function
+    
+    Dim bytes() As Byte: bytes = text
+    Dim result() As Byte
+    ReDim result(0 To UBound(bytes))
+    
+    Dim i As Long, j As Long
+    For i = LBound(bytes) To UBound(bytes) Step 2
+        If (bytes(i) >= 48) And (bytes(i) <= 57) Then
+            result(j) = bytes(i)
+            j = j + 2
+        End If
+    Next i
+    
+    If j > 0 Then
+        ReDim Preserve result(0 To j - 1)
+        digits = result
+    End If
+End Function
