@@ -115,3 +115,30 @@ Public Function digits(ByVal text As String) As String
         digits = result
     End If
 End Function
+
+'/*
+' Converts an array of bytes into a String.
+'
+' @return The bytes array as a String.
+'*/
+Public Function bytesToHexString(ByRef arr() As Byte) As String
+    If uArray.count(arr) = 0 Then
+        VBA.Err.Raise _
+            Number:=9, _
+            Source:="uString.bytesToHexString", _
+            Description:="Invalid argument: 'arr' is not initialized or is empty."
+    End If
+
+    Dim i As Long
+    Dim s As String
+    
+    For i = LBound(arr) To UBound(arr)
+        If arr(i) < 16 Then
+            s = s & "0" & VBA.Hex$(arr(i))
+        Else
+            s = s & VBA.Hex$(arr(i))
+        End If
+    Next i
+    
+    bytesToHexString = s
+End Function
